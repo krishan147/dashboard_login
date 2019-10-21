@@ -3,6 +3,7 @@ from flask import Flask, render_template, url_for, redirect, request
 from flask_caching import Cache
 from flask_restful import Api
 import secrets
+from dashboard import Car
 secret = secrets.token_hex(16)
 
 application = app = Flask(__name__)
@@ -16,7 +17,8 @@ def login():
         if request.form['username'] != 'admin' or request.form['password'] != 'admin':
             error = 'Invalid Credentials. Please try again.'
         else:
-            return ('Hello world!')
+            cObj1 = Car("Ford")
+            return cObj1.display()
     return render_template('login.html', error=error)
 
 if __name__=='__main__':
