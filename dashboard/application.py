@@ -18,7 +18,6 @@ auth = dash_auth.BasicAuth(
     VALID_USERNAME_PASSWORD_PAIRS
 )
 
-
 app.layout = html.Div([
     dcc.Tabs(id="tabs", value='tab-1', children=[
         dcc.Tab(label='Tab one', value='tab-1'),
@@ -36,9 +35,35 @@ app.layout = html.Div([
 def render_content(tab):
     if tab == 'tab-1':
         print ("tab1")
-        return html.Div([
-            html.H3('Tab content 1')
+
+        return html.Div(children=[
+            html.H1(children='Hello Dash'),
+
+            html.Div(children='''
+                Dash: A web application framework for Python.
+            '''),
+
+            dcc.Graph(
+                id='example-graph',
+                figure={
+                    'data': [
+                        {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'SF'},
+                        {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': u'Montréal'},
+                    ],
+                    'layout': {
+                        'title': 'Dash Data Visualization'
+                    }
+                }
+            )
         ])
+
+
+
+
+
+
+
+
     elif tab == 'tab-2':
         print ("tab2")
         return html.Div([
