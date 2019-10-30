@@ -4,7 +4,11 @@ import dash_html_components as html
 import dash_core_components as dcc
 from dash.dependencies import Input, Output
 import dash_auth
+from dateutil.relativedelta import relativedelta
 secret = secrets.token_hex(16)
+from transform import data as df
+
+df = (df())
 
 VALID_USERNAME_PASSWORD_PAIRS = [
     ['hello', 'world']
@@ -30,6 +34,18 @@ app.layout = html.Div([
     html.Div(id='tabs-content')
 ])
 
+slider = (dcc.Slider(
+    id='date-slider',
+    min=df['Date_Num'].min(),
+    max=df['Date_Num'].max(),
+    value=df['Date_Num'].min(),
+    marks={str(year): str(year) for year in df['Date_Num'].unique()},
+    step=None
+))
+
+# https://dash.plot.ly/getting-started
+# https://dash.plot.ly/getting-started-part-2
+
 @app.callback(Output('tabs-content', 'children'),
               [Input('tabs', 'value')])
 def render_content(tab):
@@ -37,7 +53,7 @@ def render_content(tab):
         print ("tab1")
 
         return html.Div(children=[
-            html.H1(children='Hello Dash'),
+            html.H1(children='Hello Dash '),slider,
 
             html.Div(children='''
                 Dash: A web application framework for Python.
@@ -67,27 +83,27 @@ def render_content(tab):
     elif tab == 'tab-2':
         print ("tab2")
         return html.Div([
-            html.H3('Tab content 2')
+            html.H3('Tab content 2'),slider
         ])
     elif tab == 'tab-3':
         print ("tab3")
         return html.Div([
-            html.H3('Tab content 3')
+            html.H3('Tab content 3'),slider
         ])
     elif tab == 'tab-4':
         print ("tab4")
         return html.Div([
-            html.H3('Tab content 4')
+            html.H3('Tab content 4'),slider
         ])
     elif tab == 'tab-5':
         print ("tab5")
         return html.Div([
-            html.H3('Tab content 5')
+            html.H3('Tab content 5'),slider
         ])
     elif tab == 'tab-6':
         print ("tab6")
         return html.Div([
-            html.H3('Tab content 6')
+            html.H3('Tab content 6'),slider
         ])
 
 if __name__ == '__main__':
