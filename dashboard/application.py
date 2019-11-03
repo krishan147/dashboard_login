@@ -25,10 +25,10 @@ auth = dash_auth.BasicAuth(
 
 app.layout = html.Div([
     dcc.Tabs(id="tabs", value='tab-1', children=[
-        dcc.Tab(label='Tab one', value='tab-1'),
-        dcc.Tab(label='Tab two', value='tab-2'),
-        dcc.Tab(label='Tab three', value='tab-3'),
-        dcc.Tab(label='Tab four', value='tab-4'),
+        dcc.Tab(label='Overall', value='tab-1'),
+        dcc.Tab(label='Over Time', value='tab-2'),
+        dcc.Tab(label='Geographic', value='tab-3'),
+        dcc.Tab(label='More Charts', value='tab-4'),
     ]),
     html.Div(id='tabs-content')
 ])
