@@ -8,6 +8,7 @@ from dateutil.relativedelta import relativedelta
 secret = secrets.token_hex(16)
 from transform import data as df
 from datetime import datetime as dt
+import plotly.graph_objs as go
 
 df = (df())
 
@@ -111,7 +112,6 @@ app.layout = html.Div([
     dcc.Checklist(
         id='fold_checklist',
         options=list_fold,
-        value='1',
         labelStyle={'display': 'inline-block'}
     )
 
@@ -152,23 +152,24 @@ def render_content(tab, audience_dropdown, start_date, end_date,location_dropdow
 
 
 
-
-
-
-
-
     elif tab == 'tab-2':
         print ("tab2")
         print (audience_dropdown)
-        return html.Div(children=[start_date, end_date, audience_dropdown, location_dropdown, site_dropdown, fold_checklist,
+
+        return html.Div(children=[
+            html.H1(children='Hello Dash '), start_date, end_date, audience_dropdown, location_dropdown, site_dropdown,
+            fold_checklist,
+
+            html.Div(children='''
+                    Dash: A web application framework for Python.
+                '''),
 
             dcc.Graph(
-                id='example-graph',
-                mode='lines+markers',
+                id='example-graph2',
                 figure={
                     'data': [
-                        {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'SF'},
-                        {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': u'Montréal'},
+                        #                    {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'line', 'name': 'SF'},
+                        {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'line', 'name': u'Montréal'},
                     ],
                     'layout': {
                         'title': 'Dash Data Visualization'
@@ -176,15 +177,52 @@ def render_content(tab, audience_dropdown, start_date, end_date,location_dropdow
                 }
             )
         ])
+
+
+
     elif tab == 'tab-3':
         print ("tab3")
         return html.Div([
             html.H3('Tab content 3'),audience_dropdown, location_dropdown, site_dropdown,fold_checklist,
         ])
+
+
+
+
     elif tab == 'tab-4':
         print ("tab4")
         return html.Div([
             html.H3('Tab content 4'),audience_dropdown, location_dropdown, site_dropdown,fold_checklist,
+
+            dcc.Graph(
+                id='life-exp-vs-gdp',
+                figure={
+                    'data': [
+                        go.Scatter(
+                            x=df[df['continent'] == i]['gdp per capita'],
+                            y=df[df['continent'] == i]['life expectancy'],
+                            text=df[df['continent'] == i]['country'],
+                            mode='markers',
+                            opacity=0.7,
+                            marker={
+                                'size': 15,
+                                'line': {'width': 0.5, 'color': 'white'}
+                            },
+                            name=i
+                        ) for i in df.continent.unique()
+                    ],
+                    'layout': go.Layout(
+                        xaxis={'type': 'log', 'title': 'GDP Per Capita'},
+                        yaxis={'title': 'Life Expectancy'},
+                        margin={'l': 40, 'b': 40, 't': 10, 'r': 10},
+                        legend={'x': 0, 'y': 1},
+                        hovermode='closest'
+                    )
+                }
+            )
+
+
+
         ])
 
 if __name__ == '__main__':
