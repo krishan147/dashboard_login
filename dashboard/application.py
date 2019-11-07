@@ -129,26 +129,19 @@ def render_content(tab, audience_dropdown, start_date, end_date,location_dropdow
     if tab == 'tab-1':
         print ("tab1")
 
-        return html.Div(children=[
-            html.H1(children='Hello Dash '),start_date, end_date,audience_dropdown, location_dropdown, site_dropdown, fold_checklist,
+        return html.Div(children=[html.H1(children='Hello Dash1'),
+                                  html.H1(children='Hello Dash2'),
+                                  html.H1(children='Hello Dash3'),
+                                  html.H1(children='Hello Dash4'),
+                                  html.H1(children='Hello Dash5'),
+                                  html.H1(children='Hello Dash6'),
+                                  html.H1(children='Hello Dash7'),
+                                  html.H1(children='Hello Dash8'),
+                                  html.H1(children='Hello Dash9')
 
-            html.Div(children='''
-                Dash: A web application framework for Python.
-            '''),
+            ,start_date, end_date,audience_dropdown, location_dropdown, site_dropdown, fold_checklist,
 
-            dcc.Graph(
-                id='example-graph',
-                figure={
-                    'data': [
-                        {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'SF'},
-                        {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': u'Montréal'},
-                    ],
-                    'layout': {
-                        'title': 'Dash Data Visualization'
-                    }
-                }
-            )
-        ])
+        ],style={'columnCount': 3})
 
 
 
@@ -156,9 +149,7 @@ def render_content(tab, audience_dropdown, start_date, end_date,location_dropdow
         print ("tab2")
         print (audience_dropdown)
 
-        return html.Div(children=[
-            html.H1(children='Hello Dash '), start_date, end_date, audience_dropdown, location_dropdown, site_dropdown,
-            fold_checklist,
+        return html.Div(children=[start_date, end_date, audience_dropdown, location_dropdown, site_dropdown, fold_checklist,
 
             html.Div(children='''
                     Dash: A web application framework for Python.
@@ -168,7 +159,6 @@ def render_content(tab, audience_dropdown, start_date, end_date,location_dropdow
                 id='example-graph2',
                 figure={
                     'data': [
-                        #                    {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'line', 'name': 'SF'},
                         {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'line', 'name': u'Montréal'},
                     ],
                     'layout': {
@@ -191,39 +181,39 @@ def render_content(tab, audience_dropdown, start_date, end_date,location_dropdow
 
     elif tab == 'tab-4':
         print ("tab4")
-        return html.Div([
-            html.H3('Tab content 4'),audience_dropdown, location_dropdown, site_dropdown,fold_checklist,
+        return html.Div(children=[start_date, end_date, audience_dropdown, location_dropdown, site_dropdown, fold_checklist,
+
+            html.Div(children='''
+                    Dash: A web application framework for Python.
+                '''),
 
             dcc.Graph(
-                id='life-exp-vs-gdp',
+                id='example-graph3',
                 figure={
                     'data': [
-                        go.Scatter(
-                            x=df[df['continent'] == i]['gdp per capita'],
-                            y=df[df['continent'] == i]['life expectancy'],
-                            text=df[df['continent'] == i]['country'],
-                            mode='markers',
-                            opacity=0.7,
-                            marker={
-                                'size': 15,
-                                'line': {'width': 0.5, 'color': 'white'}
-                            },
-                            name=i
-                        ) for i in df.continent.unique()
+                        {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'SF'},
+                        {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': 'Montréal'},
                     ],
-                    'layout': go.Layout(
-                        xaxis={'type': 'log', 'title': 'GDP Per Capita'},
-                        yaxis={'title': 'Life Expectancy'},
-                        margin={'l': 40, 'b': 40, 't': 10, 'r': 10},
-                        legend={'x': 0, 'y': 1},
-                        hovermode='closest'
-                    )
+                    'layout': {
+                        'title': 'Dash Data Visualization'
+                    }
                 }
-            )
+            ),
 
+              dcc.Graph(
+                  id='example-graph4',
+                  figure={
+                      'data': [
+                          {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'SF'},
+                          {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': 'Montréal'},
+                      ],
+                      'layout': {
+                          'title': 'Dash Data Visualization'
+                      }
+                  }
+              ),
 
-
-        ])
+        ], style={'columnCount': 2})
 
 if __name__ == '__main__':
     app.run_server(debug=True)
