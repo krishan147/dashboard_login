@@ -13,7 +13,6 @@ import plotly.graph_objs as go
 import base64
 import requests
 requests.packages.urllib3.disable_warnings()
-
 import ssl
 
 try:
@@ -160,7 +159,18 @@ def render_content(tab, audience_dropdown, start_date, end_date,location_dropdow
         print ("tab1")
         print (start_date, end_date, audience_dropdown, location_dropdown, site_dropdown, fold_checklist)
 
-        df_tabone = df.loc[(df['Audience'] == audience_dropdown) & (df['Location'] == location_dropdown)]
+        if type(audience_dropdown) is list:
+            pass
+        else:
+            list(audience_dropdown)
+
+        if type(location_dropdown) is list:
+            pass
+        else:
+            list(location_dropdown)
+
+        df_tabone = df.loc[df.Audience.isin(audience_dropdown) & df.Location.isin(location_dropdown)]
+
         sales = df_tabone['Sales'].sum()
 
         return html.Div(children=[html.H1(children=str(sales)),
