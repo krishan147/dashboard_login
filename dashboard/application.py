@@ -1,3 +1,5 @@
+# need to split this out also
+
 import secrets
 import pandas as pd
 import dash
@@ -103,7 +105,6 @@ app.layout = html.Div([
         }
     ),
 
-
     dcc.Dropdown(
         id='location_dropdown',
         placeholder="Select Location",
@@ -141,8 +142,6 @@ app.layout = html.Div([
     )
 
 ])
-
-
 
 
 
